@@ -5,7 +5,6 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 function readTasksFromStorage() {
     const storedProjects = JSON.parse(localStorage.getItem('tasks'));
-  
     if(storedProjects !== null){
       return storedProjects;
     }
@@ -67,7 +66,7 @@ function createTaskCard(task) {
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
     const projects = readTasksFromStorage();
-    console.log(projects);
+
     // ? Empty existing project cards out of the lanes
     const todoList = $('#todo-cards');
     todoList.empty();
@@ -105,6 +104,8 @@ function renderTaskList() {
         });
       },
     });
+
+    console.log(taskList);
 }
 
 // Todo: create a function to handle adding a new task
@@ -134,13 +135,14 @@ function handleAddTask(event){
     $('#task-title-input').val('');
     $('#taskDueDate').val('');
     $('#task-description').val('');
-    console.log($('#task-title-input').val());
+    $('#formModal').modal('toggle');
+
 }
 
 // Todo: create a function to handle deleting a task
-function handleDeleteTask(event){
+function handleDeleteTask(){
     const projectId = $(this).attr('data-project-id');
-    const projects = readTasksFromStorage();
+    const projects = taskList;
 
     //when delete button is called, loop through the array of stored tasks and remove
     projects.forEach((project)=> {
@@ -158,7 +160,7 @@ function handleDeleteTask(event){
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
  // ? Read projects from localStorage
- const projects = readTasksFromStorage();
+ const projects = taskList;
 
  // ? Get the project id from the event
  const taskId = ui.draggable[0].dataset.projectId;
