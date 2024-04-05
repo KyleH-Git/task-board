@@ -47,6 +47,17 @@ function createTaskCard(task) {
     cardBtn.attr('data-project-id', task.id);
     cardBtn.on('click', handleDeleteTask);
 
+    //check date attribute to assign correct color
+    const dueDate = dayjs(task.date, 'MM/DD/YYYY');
+    const currentDate = dayjs();
+    if(currentDate.isSame(dueDate, 'day')){
+        taskCard.addClass('bg-warning text-white');
+        cardBtn.addClass('border-light');
+    }else if(currentDate.isAfter(dueDate)){
+        taskCard.addClass('bg-danger text-white');
+        cardBtn.addClass('border-light');
+    }
+
     cardBody.append(cardType, cardDate)
     taskCard.append(cardHeader, cardBody, cardBtn);
 
@@ -113,8 +124,6 @@ function handleAddTask(event){
         desc: taskDesc, 
         status: "to-do"
     }
-    //call the create task function
-
     taskList.push(taskCard);
 
     //add the task to local storage
@@ -125,6 +134,7 @@ function handleAddTask(event){
     $('#task-title-input').val('');
     $('#taskDueDate').val('');
     $('#task-description').val('');
+    console.log($('#task-title-input').val());
 }
 
 // Todo: create a function to handle deleting a task
