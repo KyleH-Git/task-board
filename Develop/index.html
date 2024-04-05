@@ -30,7 +30,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title text-center">Add Task</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -55,7 +55,7 @@
                     id="taskDueDate"
                   />
                 </li>
-                <li>
+                <li class="list-group-item">
                   <textarea id="task-description" rows="4" cols="50">
 
                   </textarea>
@@ -63,13 +63,15 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success">Add Task</button>
+            <button type="button" class="btn btn-success" id="submit-btn">Add Task</button>
+
+            
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row swim-lanes text-center justify-content-between">
+    <div id="board" class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
           <div class="card-header bg-white">
