@@ -57,6 +57,7 @@ function createTaskCard(task) {
         cardBtn.addClass('border-light');
     }
 
+    //appends separate card elements to generate a taskCard, returns the card
     cardBody.append(cardType, cardDate)
     taskCard.append(cardHeader, cardBody, cardBtn);
 
@@ -118,6 +119,7 @@ function handleAddTask(event){
     const taskDesc = $('#task-description').val().trim();
     let id = generateTaskId();
     
+    //create a taskCard object with values from form
     const taskCard = {
         id: id,
         title: taskTitle,
@@ -125,9 +127,10 @@ function handleAddTask(event){
         desc: taskDesc, 
         status: "to-do"
     }
+    //append the taskCard to the current taskList array
     taskList.push(taskCard);
 
-    //add the task to local storage
+    //stores current taskList array in local storage, display taskList to site
     localStorage.setItem("tasks", JSON.stringify(taskList))
     renderTaskList();
 
@@ -150,7 +153,6 @@ function handleDeleteTask(){
           projects.splice(projects.indexOf(project), 1);
         }
       });
-    //THIS , can use splice to do so
     localStorage.setItem('tasks', JSON.stringify(projects));
 
   // ? Here we use our other function to print projects back to the screen
@@ -188,6 +190,7 @@ $(document).ready(function () {
     //add event listeners 
     $('#submit-btn').on('click', handleAddTask);
     $('#board').on('click', '.delete', handleDeleteTask);
+    
     //making lanes droppable
     $('.lane').droppable({
         accept: '.draggable',
